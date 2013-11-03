@@ -12,6 +12,9 @@ from zope.schema.vocabulary import SimpleTerm
 from zope.schema.vocabulary import SimpleVocabulary
 
 
+DISABLE_PLONE_APP_THEMING = 1
+
+
 def getDiazoThemes(context):
     """Get a list of all Diazo themes.
     """
@@ -20,6 +23,9 @@ def getDiazoThemes(context):
              for theme in themes
              if theme.__name__ != TEMPLATE_THEME]
     terms.insert(0, (SimpleTerm('', '', _(u'No local theme'))))
+    terms.append((SimpleTerm(DISABLE_PLONE_APP_THEMING,
+                             DISABLE_PLONE_APP_THEMING,
+                             _(u'Disable theming'))))
 
     return SimpleVocabulary(terms)
 

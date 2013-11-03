@@ -4,6 +4,9 @@ There's a frood who really knows where his towel is
 1.0b3 (unreleased)
 ^^^^^^^^^^^^^^^^^^
 
+- Temporary workaround for not inheriting site defaults for plone.app.theming
+  settings.
+  [davidjb]
 - Fix issue preventing setting theme on virtual hosted sites and directories.
   [davidjb]
 - Add translatable string for theme field description.

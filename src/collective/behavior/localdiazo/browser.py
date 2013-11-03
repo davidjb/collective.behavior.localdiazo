@@ -6,6 +6,7 @@ from plone.registry.interfaces import IRegistry
 from plone.app.theming.interfaces import IThemeSettings
 from Products.Five import BrowserView
 from plone.app.theming.utils import getAvailableThemes
+from collective.behavior.localdiazo.behavior import DISABLE_PLONE_APP_THEMING
 
 
 class LocalRegistrySetter(BrowserView):
@@ -23,6 +24,7 @@ class LocalRegistrySetter(BrowserView):
         themes = getAvailableThemes()
 
         if self.context.theme:
+            settings.enabled = self.context.theme != DISABLE_PLONE_APP_THEMING
             for theme in themes:
                 if theme.rules == self.context.theme:
                     settings.currentTheme = theme.__name__.decode()
@@ -31,6 +33,7 @@ class LocalRegistrySetter(BrowserView):
                     settings.parameterExpressions = theme.parameterExpressions
                     settings.doctype = theme.doctype
         else:
+            return
             fields = getFields(IThemeSettings)
             settings_fields = ('currentTheme', 'rules', 'absolutePrefix', 'parameterExpressions', 'doctype',)
             for settings_field in settings_fields:
