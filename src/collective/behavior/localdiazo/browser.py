@@ -18,7 +18,7 @@ class LocalRegistrySetter(BrowserView):
         """
         """
         registry = queryUtility(IRegistry)
-        if registry != self.context['local_registry']:
+        if registry != self.context.get('local_registry'):
             return
         settings = registry.forInterface(IThemeSettings, False)
         themes = getAvailableThemes()
