@@ -4,7 +4,8 @@ There's a frood who really knows where his towel is
 1.0b3 (unreleased)
 ^^^^^^^^^^^^^^^^^^
 
-- Code defensively for a context that may not have a local registry.
+- Code defensively for a context that may not have a local registry by
+  creating a new local registry. 
   [davidjb]
 - Temporary workaround for not inheriting site defaults for plone.app.theming
   settings.

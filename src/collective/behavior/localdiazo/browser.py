@@ -6,6 +6,7 @@ from plone.registry.interfaces import IRegistry
 from plone.app.theming.interfaces import IThemeSettings
 from Products.Five import BrowserView
 from plone.app.theming.utils import getAvailableThemes
+from collective.behavior.localregistry.subscribers import enableChildRegistry
 from collective.behavior.localdiazo.behavior import DISABLE_PLONE_APP_THEMING
 
 
@@ -17,9 +18,15 @@ class LocalRegistrySetter(BrowserView):
     def __call__(self):
         """
         """
+        local_registry = self.context.get('local_registry')
+        #If registry is not present, then create it
+        if local_registry is None:
+            enableChildRegistry(self.context, None)
+
         registry = queryUtility(IRegistry)
         if registry != self.context.get('local_registry'):
             return
+
         settings = registry.forInterface(IThemeSettings, False)
         themes = getAvailableThemes()
 
